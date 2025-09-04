@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Chapter 2</title>
+  <style>
+    :root {
+      --muted: #777;
+      --bg: #f4f4f4;
+      --border: #e0e0e0;
+      --accent: #0366d6;
+    --sidebar-width: 220px;
+      --header-height: 56px;
+    }
+
+    html, body { height:100%; margin:0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; }
+
+    header {
+      height: var(--header-height);
+      padding: 8px 16px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+    }
+
+    header h1 { margin:0; font-size:1.05rem; font-weight:600; }
+
+    /* main grid: header at top, below it a two-column grid where
+       the first column auto-sizes to the tab text and the second
+       column takes the remaining space for the iframe */
+    .main {
+      position: fixed;
+      top: var(--header-height);
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    /* Vertical sidebar (grid column 1) */
+    .tabs {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 8px 10px;
+      background: white;
+      border-right: 1px solid var(--border);
+      box-sizing: border-box;
+      overflow: auto;
+    }
+
+    .tab {
+      background: transparent;
+      border: 1px solid transparent;
+      padding: 6px 8px;
+      border-radius: 6px;
+      cursor: pointer;
+      color: inherit;
+      display: inline-flex;
+      align-items: center;
+      white-space: nowrap;
+      width: auto;
+      text-align: left;
+    }
+    .tab:hover { background:#fafafa; }
+    .tab.active { background:var(--accent); color:white; border-color:var(--accent); }
+
+    .note { color: var(--muted); font-size: 0.95rem; margin-bottom: 6px; }
+
+    /* Content pane (iframe) fills the right grid column */
+    .frame {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+    .tabs .spacer { flex: 1; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chapter 2 — Embedded</h1>
+  </header>
+
+  <div class="main">
+    <div class="tabs" id="tabs">
+      <div class="note" id="global-note" aria-hidden="true"></div>
+      <!-- tabs inserted here -->
+      <div class="spacer"></div>
+    </div>
+
+    <iframe class="frame" id="frame" src="" title="Chapter 2 exercise viewer"></iframe>
+  </div>
+
+  <script>
+    (function(){
+      // Hardcoded list of exercises and labels
+      const exercises = [
+        { file: 'Ch2_p_p_2.html', label: 'Project 2' },
+        { file: 'Ch2_p_ex/Ch2_p_ex_1.html', label: 'Exercise 1' },
+        { file: 'Ch2_p_ex/Ch2_p_ex_3.html', label: 'Exercise 3' },
+        { file: 'Ch2_p_ex/Ch2_p_ex_4.html', label: 'Exercise 4' },
+        { file: 'Ch2_p_ex/Ch2_p_ex_5.html', label: 'Exercise 5' },
+        { file: 'Ch2_p_ex/Ch2_p_ex_6.html', label: 'Exercise 6' },
+        { file: 'Ch2_p_ex/Ch2_p_ex_7.html', label: 'Exercise 7' },
+        { file: 'Ch2_p_ex/Ch2_p_ex_8.html', label: 'Exercise 8' }
+        // Add more as needed
+      ];
+
+      const tabsEl = document.getElementById('tabs');
+      const iframe = document.getElementById('frame');
+
+      let first = true;
+      for (const ex of exercises){
+        const btn = document.createElement('button');
+        btn.className = 'tab';
+        btn.textContent = ex.label;
+        btn.addEventListener('click', ()=>{
+          Array.from(tabsEl.querySelectorAll('.tab')).forEach(t=>t.classList.remove('active'));
+          btn.classList.add('active');
+          iframe.src = ex.file;
+        });
+        tabsEl.insertBefore(btn, tabsEl.querySelector('.spacer'));
+        if (first){ btn.classList.add('active'); iframe.src = ex.file; first=false; }
+      }
+    })();
+  </script>
+</body>
+</html>
