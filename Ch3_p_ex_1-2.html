@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fluid Converter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="scripts.js"></script>
+</head>
+<body>
+
+<div data-role="page" id="interface">
+
+    <div data-role="header" data-theme="b">
+        <h1>Fluid unit conversion</h1>
+    </div>
+
+    <div role="main" class="ui-content">
+        <form>
+            <label for="gallons-input">Enter the Quanity in Gallons:</label>
+            <input type="number" name="gallons-input" id="gallons-input" value="1">
+        </form>
+        <h3 style="text-align:center;" id="quantity-display">Quantity: 1 gallon</h3>
+        <h3 style="text-align:center;" id="liters-display"></h3>
+    </div>
+</div>
+
+</body>
+</html>
