@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fluid Converter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <style>
+        /* Unselected tab style */
+        .ui-header .ui-navbar .ui-btn:not(.ui-btn-active) {
+            background-color: white !important;
+            border-color: #ccc !important;
+            color: grey !important;
+            text-shadow: none !important;
+        }
+
+        /* Selected tab style */
+        .ui-header .ui-navbar .ui-btn.ui-btn-active {
+            background-color: #3388cc !important;
+            border-color: #3388cc !important;
+            color: white !important;
+        }
+        .ui-header {
+            border-width: 0 !important;
+        }
+        .input-with-unit {
+            display: flex;
+            align-items: center;
+        }
+        .input-with-unit .ui-input-text {
+            flex-grow: 1;
+        }
+        .input-with-unit span {
+            padding-left: 10px;
+            font-weight: bold;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script>
+        $(document).on("mobileinit", function () {
+            $.mobile.defaultPageTransition = "none";
+        });
+    </script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+<body>
+
+<div data-role="page" id="information">
+    <div data-role="header" data-theme="b">
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#information" class="ui-btn-active ui-state-persist">Information</a></li>
+                <li><a href="#interface">Interface</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div role="main" class="ui-content">
+        <h1>Fluid unit conversion</h1>
+        <p>There are two primary units for measuring volume of fluid.</p>
+        <ul>
+            <li>Imperial system uses units such as gallon.</li>
+            <li>Metric system uses units such as liters.</li>
+        </ul>
+        <p>This app allows you to convert from gallons to liters using the formula: liter = gallon * 3.789.</p>
+    </div>
+</div>
+
+<div data-role="page" id="interface">
+    <div data-role="header" data-theme="b">
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#information">Information</a></li>
+                <li><a href="#interface" class="ui-btn-active ui-state-persist">Interface</a></li>
+            </ul>
+        </div>
+    </div>
+    <div role="main" class="ui-content">
+        <form>
+            <div class="input-with-unit">
+                <label for="quantity" class="ui-hidden-accessible">Quantity</label>
+                <input type="number" name="quantity" id="quantity" value="1" placeholder="Enter value">
+                <span id="from-unit-label">gallons</span>
+            </div>
+
+            <fieldset data-role="controlgroup">
+                <legend>Convert to:</legend>
+                <input type="radio" name="to-unit" id="to-litres" value="litres" checked="checked">
+                <label for="to-litres">Litres</label>
+                <input type="radio" name="to-unit" id="to-gallons" value="gallons">
+                <label for="to-gallons">Gallons</label>
+            </fieldset>
+            <button id="convert-btn" class="ui-btn ui-corner-all">Convert</button>
+        </form>
+        <h3 style="text-align:center;" id="result-display"></h3>
+    </div>
+</div>
+
+<script>
+    $(document).on("pagecreate", "#interface", function() {
+        function updateFromUnit() {
+            var toUnit = $("input[name='to-unit']:checked").val();
+            if (toUnit === "litres") {
+                $("#from-unit-label").text("gallons");
+            } else {
+                $("#from-unit-label").text("litres");
+            }
+        }
+
+        function convert() {
+            var toUnit = $("input[name='to-unit']:checked").val();
+            var inputValue = parseFloat($("#quantity").val());
+
+            if (isNaN(inputValue)) {
+                $("#result-display").text("Please enter a valid number.");
+                return;
+            }
+
+            var result;
+            var resultUnit;
+
+            if (toUnit === "litres") { // from gallons to litres
+                result = inputValue * 3.78541;
+                resultUnit = "liter(s)";
+            } else { // from litres to gallons
+                result = inputValue / 3.78541;
+                resultUnit = "gallon(s)";
+            }
+
+            $("#result-display").text(result.toFixed(3) + " " + resultUnit);
+        }
+
+        // Initial setup
+        updateFromUnit();
+        convert();
+
+        // Bind events
+        $("input[name='to-unit']").on("change", function() {
+            updateFromUnit();
+            $("#result-display").text("");
+        });
+        
+        $("#convert-btn").on("click", function(e) {
+            e.preventDefault();
+            convert();
+        });
+    });
+</script>
+
+</body>
+</html>
