@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>User Information</title>
+
+    <!-- Adjusting the page on mobile screen -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+    <!-- JavaScript -->
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
+    <script src="userForm.js"></script>
+    <script src="pageLoader.js"></script>
+</head>
+<body>
+    <!-- User Information Page/Form -->
+    <div data-role="page" id="pageUserInfo">
+        <div data-role="header">
+            <h1>User Information</h1>
+            <a href="menu.html" data-ajax="false" data-role="button" data-icon="bars" data-iconpos="right" data-inline="true">Menu</a>
+        </div>
+
+        <div data-role="content">
+            <form id="frmUserForm" action="">
+                <div data-role="fieldcontain">
+                    <label for="txtFirstName">First Name:</label>
+                    <input type="text" name="txtFirstName" id="txtFirstName" value="" required>
+                </div>
+                <div data-role="fieldcontain">
+                    <label for="txtLastName">Last Name:</label>
+                    <input type="text" name="txtLastName" id="txtLastName" value="" required>
+                </div>
+                <div data-role="fieldcontain">
+                    <label for="txtHealthCardNumber">Health Card Number:</label>
+                    <input type="text" name="txtHealthCardNumber" id="txtHealthCardNumber" value="" required>
+                </div>
+                <div data-role="fieldcontain">
+                    <label for="datBirthdate">Birth Date:</label>
+                    <input type="date" name="datBirthdate" id="datBirthdate" value="" required>
+                </div>
+                <div data-role="fieldcontain">
+                    <label for="slcCancerType">Cancer Type:</label>
+                    <select name="slcCancerType" id="slcCancerType" required>
+                        <option value="">Select Cancer Type</option>
+                        <option value="Papillary">Papillary</option>
+                        <option value="Follicular">Follicular</option>
+                        <option value="Medullary">Medullary</option>
+                        <option value="Anaplastic">Anaplastic</option>
+                    </select>
+                </div>
+                <div data-role="fieldcontain">
+                    <label for="slcCancerStage">Cancer Stage:</label>
+                    <select name="slcCancerStage" id="slcCancerStage" required>
+                        <option value="">Select Cancer Stage</option>
+                        <option value="StageOne">Stage I</option>
+                        <option value="StageTwo">Stage II</option>
+                        <option value="StageThree">Stage III</option>
+                        <option value="StageFour">Stage IV</option>
+                    </select>
+                </div>
+                <div data-role="fieldcontain">
+                    <label for="slcTSHRange">TSH Range:</label>
+                    <select name="slcTSHRange" id="slcTSHRange" required>
+                        <option value="">Select TSH Range</option>
+                        <option value="StageA">0.01 - 0.1 mIU/L</option>
+                        <option value="StageB">0.1 - 0.5 mIU/L</option>
+                        <option value="StageC">0.35 - 2.0 mIU/L</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div data-role="fieldcontain">
+                    <label for="changePassword">Password:</label>
+                    <input type="password" placeholder="New Password" name="changePassword" data-mini="false" id="changePassword" value="" required>
+                </div>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <button type="button" id="btnEdit" data-icon="edit">Edit</button>
+                    </div>
+                    <div class="ui-block-b">
+                         <input type="submit" id="btnSave" value="Save Changes" data-icon="check">
+                    </div>
+                </div>
+                 <button type="button" id="btnCancel" data-icon="delete">Cancel</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
