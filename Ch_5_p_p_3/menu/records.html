@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Records</title>
+
+    <!-- Adjusting the page on mobile screen -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" xintegrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+    <!-- JavaScript -->
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
+</head>
+<body>
+<!-- Records page -->
+<div data-role="page" id="pageRecords">
+    <div data-role="header">
+      <a href="menu.html" data-ajax="false" data-role="button" data-icon="bars" iconpos="left" data-inline="true">Menu</a>
+      <a href="#pageAbout" data-role="button" data-icon="info" iconpos="right" data-inline="true">Info</a>
+      <h1>Records</h1>
+    </div>
+  
+    <div data-role="content">
+      <!-- User's Information Section -->
+      <div data-role="fieldcontain" id="divUserSection">
+      </div>
+  
+      <h3 align="center">History</h3>
+      <div data-role="fieldcontain">
+        <!-- Records Table -->
+        <table id="tblRecords" class="ui-responsive table-stroke">
+        </table>
+      </div>
+  
+      <div data-role="fieldcontain">
+        <a href="#pageNewRecordForm" id="btnAddRecord" data-role="button" data-icon="plus">Add New Entry</a>
+        <a href="#" data-role="button" id="btnClearHistory" data-icon="delete">Clear History</a>
+      </div>
+    </div>
+  </div>
+
+<!-- New Record Form page -->
+<div data-role="page" id="pageNewRecordForm">
+    <div data-role="header">
+        <a href="menu.html" data-ajax="false" data-role="button" data-icon="bars" data-iconpos="left" data-inline="true">Menu</a>
+        <a href="#pageAbout" data-role="button" data-icon="info" data-iconpos="right" data-inline="true">Info</a>
+        <h1>New Record</h1>
+    </div>
+
+    <div data-role="content">
+        <form id="frmNewRecordForm" action="">
+            <div data-role="fieldcontain">
+                <label for="datExamDate">Date:</label>
+                <input type="date" name="datExamDate" data-mini="false" id="datExamDate" value="">
+            </div>
+            <div data-role="fieldcontain">
+                <label for="txtTSH"><abbr title="Thyroid-stimulating hormone">TSH</abbr> (mIU/L):</label>
+                <input type="number" step="0.01" placeholder="0" name="txtTSH" data-mini="false" id="txtTSH" value="">
+            </div>
+            <div data-role="fieldcontain">
+                <label for="txtThyroglobulin">Thyroglobulin (Âµg/L) [Optional]:</label>
+                <input type="number" step="0.01" placeholder="0" name="txtThyroglobulin" data-mini="false" id="txtThyroglobulin" value="">
+            </div>
+            <div data-role="fieldcontain">
+                <label for="txtSynthroidDose"><abbr title="Synthroid or Eltroxin">Synthroid*</abbr> (Âµg):</label>
+                <input type="number" step="0.01" placeholder="0" name="txtSynthroidDose" data-mini="false" id="txtSynthroidDose" value="">
+            </div>
+
+            <input type="submit" id="btnSubmitRecord" value="">
+        </form>
+    </div>
+    <p>&nbsp;&nbsp;100 microgram = .0001 gram</p>
+</div>
+
+<script>
+    /*
+     * This function is called by pageLoader.js when the records page is shown.
+     * This is a placeholder that will be overwritten by the function in Table.js
+     */
+    function listRecords() {
+      // Placeholder: In a real app, this would populate the records table.
+      console.log("listRecords() called.");
+    }
+</script>
+<script src="pageLoader.js"></script>
+<script src="Table.js"></script>
+<script src="userForm.js"></script>
+</body>
+</html>
