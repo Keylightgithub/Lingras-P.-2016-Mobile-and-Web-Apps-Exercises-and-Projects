@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Menu</title>
+
+    <!-- Adjusting the page on mobile screen -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" xintegrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+    <!-- JavaScript -->
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
+    <script>
+        $(document).on('pagebeforeshow', '#pageMenu', function(){
+            if(sessionStorage.getItem('loggedIn') !== 'true'){
+                // If not logged in, redirect to the login page
+                $.mobile.changePage("../password_entry.html", { transition: "slide", reverse: true });
+            }
+
+            var storageMode = sessionStorage.getItem('storageMode');
+            if (storageMode === 'local') {
+                $('a[href="#pageSync"]').addClass('ui-disabled');
+            } else {
+                $('a[href="#pageSync"]').removeClass('ui-disabled');
+            }
+        });
+
+        $(document).on('click', '#logoutButton', function() {
+            sessionStorage.removeItem('loggedIn');
+        });
+    </script>
+</head>
+<body>
+<!-- Menu page -->
+<div data-role="page" id="pageMenu">
+    <div data-role="header">
+        <h1>Menu</h1>
+        <a href="../password_entry.html" id="logoutButton" data-role="button" data-icon="back" data-iconpos="right" data-inline="true" data-ajax="false">Logout</a>
+    </div>
+    <div data-role="content">
+        <div data-role="controlgroup">
+            <a href="user_info.html" data-ajax="false" data-role="button">User Info</a>
+            <a href="records.html" data-ajax="false" data-role="button">Records</a>
+            <a href="graph.html" data-ajax="false" data-role="button">Graph</a>
+            <a href="advice_suggestions.html" data-ajax="false" data-role="button">Suggestions</a>
+            <a href="#pageSync" data-role="button">Sync</a>
+        </div>
+    </div>
+</div>
+
+<!--Sync Page -->
+<div data-role="page" id="pageSync">
+  <div data-role="header">
+    <a href="#pageMenu" data-role="button" data-icon="bars" data-iconpos="left" data-inline="true">Menu</a>
+    <a href="#pageAbout" data-role="button" data-icon="info" data-iconpos="right" data-inline="true">Info</a>
+    <h1>Sync Account Information</h1>
+  </div>
+  <div data-role="content">
+    <div data-role="controlgroup">
+      <a id="btnUpload" data-role="button">Upload Records</a>
+      <a id="btnDownload" data-role="button">Download Records (Do Not Overwrite Local Data)</a>
+      <a id="btnDownloadOverwrite" data-role="button">Download Records (Overwrite Local Data)</a>
+    </div>
+  </div>
+</div>
+<script src="Sync.js"></script>
+</body>
+</html>
